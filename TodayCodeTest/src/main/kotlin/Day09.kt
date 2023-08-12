@@ -14,6 +14,10 @@ fun main(args: Array<String>) {
     println(solution03("ProgrammerS123", 11))
     println(solution03("He110W0r1d", 5))
 
+    println("solution 04")
+    println(solution04("banana"))
+    println(solution04("programmers"))
+
 }
 
 /**
@@ -48,4 +52,17 @@ fun solution02(myStrings: Array<String>, parts: Array<IntArray>): String {
  */
 fun solution03(my_string: String, n: Int): String {
     return my_string.substring(my_string.length - n)
+}
+
+/**
+ * 문제 설명
+ * 어떤 문자열에 대해서 접미사는 특정 인덱스부터 시작하는 문자열을 의미합니다.
+ * 예를 들어, "banana"의 모든 접미사는 "banana", "anana", "nana", "ana", "na", "a"입니다.
+ * 문자열 my_string이 매개변수로 주어질 때,
+ * my_string의 모든 접미사를 사전순으로 정렬한 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
+ */
+fun solution04(my_string: String): Array<String> {
+    return my_string.mapIndexedNotNull { index, str ->
+        my_string.takeLast(index + 1)
+    }.sorted().toTypedArray()
 }
