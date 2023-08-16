@@ -66,4 +66,22 @@ fun main(args: Array<String>) {
     println("solution04 : 세로 읽기")
     println(solution04("ihrhbakrfpndopljhygc", 4, 2))
     println(solution04("programmers", 1, 1))
+
+    println()
+
+    /**
+     * solution05 : qr code
+     * 문제 설명
+     * 두 정수 q, r과 문자열 code가 주어질 때,
+     * code의 각 인덱스를 q로 나누었을 때 나머지가 r인 위치의 문자를 앞에서부터 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
+     */
+    fun solution05(q: Int, r: Int, code: String): String {
+        return code.filterIndexed { index, _ ->
+            index % q == r
+        }
+    }
+
+    println("solution05 : qr code")
+    println(solution05(3, 1, "qjnwezgrpirldywt"))
+    println(solution05(1, 0, "programmers"))
 }
