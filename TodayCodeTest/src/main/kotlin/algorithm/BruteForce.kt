@@ -50,4 +50,42 @@ fun main(args: Array<String>) {
     println(solution01(arrayOf(intArrayOf(60, 50), intArrayOf(30, 70), intArrayOf(60, 30), intArrayOf(80, 40))))
     println(solution01(arrayOf(intArrayOf(10, 7), intArrayOf(12, 3), intArrayOf(8, 15), intArrayOf(14, 7), intArrayOf(5, 15))))
     println(solution01(arrayOf(intArrayOf(14, 4), intArrayOf(19, 6), intArrayOf(6, 16), intArrayOf(18, 7), intArrayOf(7, 11))))
+
+    println()
+
+    /**
+     * solution02 : 모의고사
+     * 문제 설명
+     * 수포자는 수학을 포기한 사람의 준말입니다. 수포자 삼인방은 모의고사에 수학 문제를 전부 찍으려 합니다. 수포자는 1번 문제부터 마지막 문제까지 다음과 같이 찍습니다.
+     * 1번 수포자가 찍는 방식: 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, ...
+     * 2번 수포자가 찍는 방식: 2, 1, 2, 3, 2, 4, 2, 5, 2, 1, 2, 3, 2, 4, 2, 5, ...
+     * 3번 수포자가 찍는 방식: 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, ...
+     * 1번 문제부터 마지막 문제까지의 정답이 순서대로 들은 배열 answers가 주어졌을 때, 가장 많은 문제를 맞힌 사람이 누구인지 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+     */
+    fun solution02(answers: IntArray): IntArray {
+        // 규칙
+        val a = intArrayOf(1, 2, 3, 4, 5)
+        val b = intArrayOf(2, 1, 2, 3, 2, 4, 2, 5)
+        val c = intArrayOf(3, 3, 1, 1, 2, 2, 4, 4, 5, 5)
+
+        // 정답 개수
+        val scores = mutableListOf(0, 0, 0)
+
+        // 정답 체크
+        answers.forEachIndexed { index, i ->
+            if (i == a[index % a.size]) scores[0]++
+            if (i == b[index % b.size]) scores[1]++
+            if (i == c[index % c.size]) scores[2]++
+        }
+
+        // 높은 점수 정답자 오름차순 정렬
+        return scores.mapIndexedNotNull { index, i ->
+            if (i == scores.maxOrNull()) index + 1
+            else null
+        }.sorted().toIntArray()
+    }
+
+    println("solution02 : 모의고사")
+    println(solution02(intArrayOf(1, 2, 3, 4, 5)).toList())
+    println(solution02(intArrayOf(1, 3, 2, 4, 2)).toList())
 }
